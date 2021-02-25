@@ -64,6 +64,9 @@ main_background_color = "#212121"
 label_info_background_color = "#212121"
 label_info_font_color = "white"
 
+color_list = ["white", "blue", "red", "yellow", "purple", "light blue", "green", "aqua", "violet", "orange", "pink", "fuchsia", "lime", "cyan"]
+effects_list = ["fire", "fade", "running lights", ""]
+
 window = Tk()
 window.title("Python Arduino LED")
 window.geometry("{}x{}+{}+{}".format(window_width, window_height, margin_left, margin_top))
