@@ -1,33 +1,16 @@
-# arduino_LED_user.py
+from tkinter import *
 
-import serial
-import time
+window = Tk()
 
-# Define the serial port and baud rate.
-# Ensure the 'COM#' corresponds to what was seen in the Windows Device Manager
-ser = serial.Serial('COM3', 9600)
+window.title("Python Arduino LED")
 
-def led_on_off():
-    user_input = input("\n Type on / off / quit : ")
-    if user_input =="on":
-        print("LED is on...")
-        time.sleep(0.1) 
-        ser.write(b'H') 
-        led_on_off()
-    elif user_input =="off":
-        print("LED is off...")
-        time.sleep(0.1)
-        ser.write(b'L')
-        led_on_off()
-    elif user_input =="quit" or user_input == "q":
-        print("Program Exiting")
-        time.sleep(0.1)
-        ser.write(b'L')
-        ser.close()
-    else:
-        print("Invalid input. Type on / off / quit.")
-        led_on_off()
+window.geometry("900x600")
 
-time.sleep(2) # wait for the serial connection to initialize
+window.configure(bg = "orange")
 
-led_on_off()
+Label(text = "This is a Label", bg = "black", fg = "white").pack()
+
+Button(text = "Click me", bg = "white", fg = "black").pack()
+
+
+window.mainloop()
