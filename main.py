@@ -95,7 +95,8 @@ red_slider.config(highlightbackground="#212121")
 green_slider.config(highlightbackground="#212121")
 blue_slider.config(highlightbackground="#212121")
 
-
+set_color_button = Button(text ="Set color", command = set_color())
+set_random_color_button = Button(text ="Random color", command = set_random_color())
 
 # Adding combobox drop down list 
 com_port_combo_box.place(x=10, y=10)
@@ -103,11 +104,13 @@ choose_com_port_button.place(x=200,y=10)
 red_slider.place(x=10, y=50)
 green_slider.place(x=10, y=100)
 blue_slider.place(x=10, y=150)
-# Shows february as a default value 
+set_random_color_button.place(x=15, y=200)
+set_color_button.place(x=255, y=200)
+
 com_port_combo_box.current()  
 
-info_label = Label(text = "Here", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
-info_label.place(x = 100, y = 200)
+info_label = Label(text = "Info messages", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
+info_label.place(x = int(window_width/2), y = int(window_height - 75))
 
 
 window.mainloop()
