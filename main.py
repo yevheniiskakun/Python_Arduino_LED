@@ -1,6 +1,8 @@
 import sys
-import glob
+import datetime
 import serial
+import multiprocessing
+import time
 from tkinter import *
 import tkinter as tk 
 from tkinter import ttk 
@@ -34,6 +36,18 @@ def serial_ports():
             pass
     return result
 
+def choose_com_port():
+    choosen_port = com_port_combo_box.get()
+    print(choosen_port)
+
+def set_color():
+    pass
+
+def set_random_color():
+    pass
+
+WORKING_SERIAL_PORT = None
+
 screen_width = GetSystemMetrics(0)
 screen_height = GetSystemMetrics(1)
 
@@ -58,29 +72,43 @@ window.configure(bg=main_background_color)
 
 
 n = tk.StringVar() 
-com_port_choosen = ttk.Combobox(window, width = 27,  
+com_port_combo_box = ttk.Combobox(window, width = 27,  
                             textvariable = n) 
   
-com_port_choosen['values'] = ('Please choose COM port',  
+com_port_combo_box['values'] = ('Please choose COM port',  
                           ) 
 
+choose_com_port_button = Button(text ="Choose COM port", command = choose_com_port)
+
+# get list of all COM ports
 connected_serial_ports = serial_ports()
 
+# add list of COM ports to combobox
 for port in connected_serial_ports:
     available_port = str(port)
-    com_port_choosen['values'] = com_port_choosen['values'] + (available_port,)
+    com_port_combo_box['values'] = com_port_combo_box['values'] + (available_port,)
+
+red_slider = Scale(window, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="red", fg="white", activebackground='#212121')
+green_slider = Scale(window, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="green", fg="white", activebackground='#212121')
+blue_slider = Scale(window, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="blue", fg="white", activebackground='#212121')
+red_slider.config(highlightbackground="#212121")
+green_slider.config(highlightbackground="#212121")
+blue_slider.config(highlightbackground="#212121")
+
+
 
 # Adding combobox drop down list 
-
-com_port_choosen.place(x = 10, y = 10)
-  
+com_port_combo_box.place(x=10, y=10)
+choose_com_port_button.place(x=200,y=10)
+red_slider.place(x=10, y=50)
+green_slider.place(x=10, y=100)
+blue_slider.place(x=10, y=150)
 # Shows february as a default value 
-com_port_choosen.current()  
+com_port_combo_box.current()  
 
 info_label = Label(text = "Here", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
-info_label.place(x = 100, y = 100)
-
-
+info_label.place(x = 100, y = 200)
 
 
 window.mainloop()
+
