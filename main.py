@@ -71,6 +71,9 @@ def set_random_color():
     info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
 
+def set_brightness():
+    pass
+
 
 screen_width = GetSystemMetrics(0)
 screen_height = GetSystemMetrics(1)
@@ -95,7 +98,7 @@ color_button_x_margin = 400
 color_button_y_margin = 70
 
 effect_button_x_margin = 30
-effect_button_y_margin = 300
+effect_button_y_margin = 350
 
 button_font = ("Verdana", 10)
 
@@ -128,16 +131,21 @@ for port in connected_serial_ports:
 red_var = DoubleVar()
 green_var = DoubleVar()
 blue_var = DoubleVar()
+brightness_var = DoubleVar()
 
 red_slider = Scale(window, variable=red_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="red", fg="white", activebackground='#212121')
 green_slider = Scale(window, variable=green_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="green", fg="white", activebackground='#212121')
 blue_slider = Scale(window, variable=blue_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="blue", fg="white", activebackground='#212121')
+brightness_slider = Scale(window, variable=brightness_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="white", fg="white", activebackground='#212121')
 red_slider.config(highlightbackground="#212121")
 green_slider.config(highlightbackground="#212121")
 blue_slider.config(highlightbackground="#212121")
+brightness_slider.config(highlightbackground="#212121")
+
 
 set_color_button = Button(text ="Set color", command = set_color, font=button_font)
 set_random_color_button = Button(text ="Random color", command = set_random_color, font=button_font)
+set_brightness_button = Button(text ="Set brightness", command = set_brightness, font=button_font)
 
 # Adding combobox drop down list 
 com_port_combo_box.place(x=10, y=10)
@@ -145,9 +153,11 @@ choose_com_port_button.place(x=200,y=10)
 red_slider.place(x=10, y=50)
 green_slider.place(x=10, y=100)
 blue_slider.place(x=10, y=150)
+brightness_slider.place(x=10, y=235)
 
 set_random_color_button.place(x=15, y=200)
 set_color_button.place(x=255, y=200)
+set_brightness_button.place(x=220, y=285)
 
 com_port_combo_box.current()  
 
@@ -163,7 +173,7 @@ for color in colors_list:
         color_button_x_margin += 100
 
 effects_label = Label(text = "Effects", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
-effects_label.place(x = int(window_width/2 - 50), y = 250)
+effects_label.place(x = int(window_width/2 - 50), y = 300)
 
 for effect in effects_list:
     effect_button = Button(text =effect, command = set_effect, font=button_font) 
