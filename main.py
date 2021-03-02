@@ -50,29 +50,35 @@ def choose_com_port():
     choosen_port = com_port_combo_box.get()
     global WORKING_SERIAL_PORT
     WORKING_SERIAL_PORT = choosen_port
-    print(choosen_port)
+    print("Choosen port: ", choosen_port)
 
-def set_color():
+def set_basic_color():
+    color_name = color_button["text"]
+    print("Choosen basic color ", color_name)
+
+def set_custom_color():
     custom_color = ""
     red_value = int(red_var.get())
     green_value = int(green_var.get())
     blue_value = int(blue_var.get())
     custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
-    print(custom_color)
+    print("Custom color: ", custom_color)
 
 def set_effect():
-    time.sleep(0.1)
-
+    effect_name = effect_button["text"]
+    print("Choosen effect is ", effect_name)
 
 def set_random_color():
     #time.sleep(0.1)
     random_color = "#%06x" % random.randint(0, 0xFFFFFF)
-    print(random_color)
     info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
+    print("Random color is ", random_color)
 
 def set_brightness():
-    pass
+    led_brightness = 0
+    brightness_value = int(brightness_var.get())
+    print("Brightness", brightness_value)
 
 
 screen_width = GetSystemMetrics(0)
@@ -143,7 +149,7 @@ blue_slider.config(highlightbackground="#212121")
 brightness_slider.config(highlightbackground="#212121")
 
 
-set_color_button = Button(text ="Set color", command = set_color, font=button_font)
+set_color_button = Button(text ="Set color", command = set_custom_color, font=button_font)
 set_random_color_button = Button(text ="Random color", command = set_random_color, font=button_font)
 set_brightness_button = Button(text ="Set brightness", command = set_brightness, font=button_font)
 
@@ -163,7 +169,7 @@ com_port_combo_box.current()
 
 
 for color in colors_list:
-    color_button = Button(text =color, command = set_color, font=button_font) 
+    color_button = Button(text =color, command = set_color, font=button_font, command=set_basic_color) 
     if color_button_x_margin >= 800:
         color_button.place(x=color_button_x_margin, y=color_button_y_margin)
         color_button_y_margin += 50
@@ -176,7 +182,7 @@ effects_label = Label(text = "Effects", bg = label_info_background_color, fg=lab
 effects_label.place(x = int(window_width/2 - 50), y = 300)
 
 for effect in effects_list:
-    effect_button = Button(text =effect, command = set_effect, font=button_font) 
+    effect_button = Button(text =effect, command = set_effect, font=button_font, command=set_effect) 
     if effect_button_x_margin >= 800:
         effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
         effect_button_y_margin += 50
