@@ -7,9 +7,10 @@ from tkinter import *
 import tkinter as tk 
 from tkinter import ttk 
 from win32api import GetSystemMetrics
-
+import random
 
 WORKING_SERIAL_PORT = None
+baud_rate = 9600
 
 def serial_ports():
     """ Lists serial port names
@@ -39,6 +40,12 @@ def serial_ports():
             pass
     return result
 
+def open_serial_connection():
+    try:
+        ser = serial.Serial(WORKING_SERIAL_PORT, baud_rate)
+    except:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=red, font=("Verdana", 14))
+
 def choose_com_port():
     choosen_port = com_port_combo_box.get()
     global WORKING_SERIAL_PORT
@@ -46,14 +53,23 @@ def choose_com_port():
     print(choosen_port)
 
 def set_color():
-    pass
+    custom_color = ""
+    red_value = int(red_var.get())
+    green_value = int(green_var.get())
+    blue_value = int(blue_var.get())
+    custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
+    print(custom_color)
 
 def set_effect():
-    pass
+    time.sleep(0.1)
+
 
 def set_random_color():
-    pass
-
+    #time.sleep(0.1)
+    random_color = "#%06x" % random.randint(0, 0xFFFFFF)
+    print(random_color)
+    info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
 
 
 screen_width = GetSystemMetrics(0)
@@ -108,15 +124,20 @@ for port in connected_serial_ports:
     available_port = str(port)
     com_port_combo_box['values'] = com_port_combo_box['values'] + (available_port,)
 
-red_slider = Scale(window, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="red", fg="white", activebackground='#212121')
-green_slider = Scale(window, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="green", fg="white", activebackground='#212121')
-blue_slider = Scale(window, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="blue", fg="white", activebackground='#212121')
+
+red_var = DoubleVar()
+green_var = DoubleVar()
+blue_var = DoubleVar()
+
+red_slider = Scale(window, variable=red_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="red", fg="white", activebackground='#212121')
+green_slider = Scale(window, variable=green_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="green", fg="white", activebackground='#212121')
+blue_slider = Scale(window, variable=blue_var, from_=0, to=255, orient=HORIZONTAL, length=int(window_width/3), bg="#212121", troughcolor="blue", fg="white", activebackground='#212121')
 red_slider.config(highlightbackground="#212121")
 green_slider.config(highlightbackground="#212121")
 blue_slider.config(highlightbackground="#212121")
 
-set_color_button = Button(text ="Set color", command = set_color(), font=button_font)
-set_random_color_button = Button(text ="Random color", command = set_random_color(), font=button_font)
+set_color_button = Button(text ="Set color", command = set_color, font=button_font)
+set_random_color_button = Button(text ="Random color", command = set_random_color, font=button_font)
 
 # Adding combobox drop down list 
 com_port_combo_box.place(x=10, y=10)
@@ -132,7 +153,7 @@ com_port_combo_box.current()
 
 
 for color in colors_list:
-    color_button = Button(text =color, command = set_color(), font=button_font) 
+    color_button = Button(text =color, command = set_color, font=button_font) 
     if color_button_x_margin >= 800:
         color_button.place(x=color_button_x_margin, y=color_button_y_margin)
         color_button_y_margin += 50
@@ -145,7 +166,7 @@ effects_label = Label(text = "Effects", bg = label_info_background_color, fg=lab
 effects_label.place(x = int(window_width/2 - 50), y = 250)
 
 for effect in effects_list:
-    effect_button = Button(text =effect, command = set_effect(), font=button_font) 
+    effect_button = Button(text =effect, command = set_effect, font=button_font) 
     if effect_button_x_margin >= 800:
         effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
         effect_button_y_margin += 50
