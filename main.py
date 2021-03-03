@@ -52,9 +52,51 @@ def choose_com_port():
     WORKING_SERIAL_PORT = choosen_port
     print("Choosen port: ", choosen_port)
 
-def set_basic_color():
-    color_name = color_button["text"]
-    print("Choosen basic color ", color_name)
+
+def set_basic_color_white():
+    print("Choosen color white")
+
+def set_basic_color_blue():
+    print("Choosen color blue")
+
+def set_basic_color_red():
+    print("Choosen color red")
+
+def set_basic_color_yellow():
+    print("Choosen color yellow")
+
+def set_basic_color_purple():
+    print("Choosen color purple")
+
+def set_basic_color_light_blue():
+    print("Choosen color light_blue")
+
+def set_basic_color_green():
+    print("Choosen color green")
+
+def set_basic_color_aqua():
+    print("Choosen color aqua")
+
+def set_basic_color_violet():
+    print("Choosen color violet")
+
+def set_basic_color_orange():
+    print("Choosen color orange")
+
+def set_basic_color_pink():
+    print("Choosen color pink")
+
+def set_basic_color_fuchsia():
+    print("Choosen color fuchsia")
+
+def set_basic_color_lime():
+    print("Choosen color lime")
+
+def set_basic_color_cyan():
+    print("Choosen color cyan")
+
+def set_basic_color_off():
+    print("Choosen basic color off")
 
 def set_custom_color():
     custom_color = ""
@@ -64,9 +106,17 @@ def set_custom_color():
     custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
     print("Custom color: ", custom_color)
 
-def set_effect():
-    effect_name = effect_button["text"]
-    print("Choosen effect is ", effect_name)
+def fire_immitation_effect():
+    print("Choosen effect is fire_immitation_effect")
+
+def fading_lights_effect():
+    print("Choosen effect is fading_lights_effect")
+
+def running_lights_effect():
+    print("Choosen effect is running_lights_effect")
+
+def rain_effect_effect():
+    print("Choosen effect is rain_effect_effect")
 
 def set_random_color():
     #time.sleep(0.1)
@@ -97,8 +147,8 @@ main_background_color = "#212121"
 label_info_background_color = "#212121"
 label_info_font_color = "white"
 
-colors_list = ["white", "blue", "red", "yellow", "purple", "light blue", "green", "aqua", "violet", "orange", "pink", "fuchsia", "lime", "cyan", "off"]
-effects_list = ["fire immitation", "fading lights", "running lights", "rain effect", "equalizer mode"]
+
+
 
 color_button_x_margin = 400
 color_button_y_margin = 70
@@ -168,28 +218,54 @@ set_brightness_button.place(x=220, y=285)
 com_port_combo_box.current()  
 
 
-for color in colors_list:
-    color_button = Button(text =color, command = set_color, font=button_font, command=set_basic_color) 
-    if color_button_x_margin >= 800:
-        color_button.place(x=color_button_x_margin, y=color_button_y_margin)
-        color_button_y_margin += 50
-        color_button_x_margin = 400
-    else:
-        color_button.place(x=color_button_x_margin, y=color_button_y_margin)
-        color_button_x_margin += 100
+
+white_color_button = Button(text="White", font=button_font, command=set_basic_color_white, width=9) 
+white_color_button.place(x=color_button_x_margin, y=color_button_y_margin)
+blue_color_button = Button(text="Blue", font=button_font, command=set_basic_color_blue, width=9) 
+blue_color_button.place(x=color_button_x_margin+60, y=color_button_y_margin)
+red_color_button = Button(text="Red", font=button_font, command=set_basic_color_red, width=9) 
+red_color_button.place(x=color_button_x_margin+100, y=color_button_y_margin)
+yellow_color_button = Button(text="Yellow", font=button_font, command=set_basic_color_yellow, width=9) 
+yellow_color_button.place(x=color_button_x_margin+150, y=color_button_y_margin)
+purple_color_button = Button(text="Purple", font=button_font, command=set_basic_color_purple, width=9) 
+purple_color_button.place(x=color_button_x_margin+200, y=color_button_y_margin)
+light_blue_color_button = Button(text="Light_blue", font=button_font, command=set_basic_color_light_blue, width=9) 
+light_blue_color_button.place(x=color_button_x_margin+250, y=color_button_y_margin)
+green_color_button = Button(text="Green", font=button_font, command=set_basic_color_green, width=9) 
+green_color_button.place(x=color_button_x_margin+350, y=color_button_y_margin)
+aqua_color_button = Button(text="Aqua", font=button_font, command=set_basic_color_aqua, width=9) 
+aqua_color_button.place(x=color_button_x_margin+350, y=color_button_y_margin)
+violet_color_button = Button(text="Violet", font=button_font, command=set_basic_color_violet, width=9) 
+violet_color_button.place(x=color_button_x_margin+400, y=color_button_y_margin)
+orange_color_button = Button(text="Orange", font=button_font, command=set_basic_color_orange, width=9) 
+orange_color_button.place(x=color_button_x_margin, y=color_button_y_margin+50)
+pink_color_button = Button(text="Pink", font=button_font, command=set_basic_color_pink, width=9) 
+pink_color_button.place(x=color_button_x_margin+50, y=color_button_y_margin+50)
+fuchsia_color_button = Button(text="Fuchsia", font=button_font, command=set_basic_color_fuchsia, width=9) 
+fuchsia_color_button.place(x=color_button_x_margin+100, y=color_button_y_margin+50)
+lime_color_button = Button(text="Lime", font=button_font, command=set_basic_color_lime, width=9) 
+lime_color_button.place(x=color_button_x_margin+150, y=color_button_y_margin+50)
+cyan_color_button = Button(text="Cyan", font=button_font, command=set_basic_color_cyan, width=9) 
+cyan_color_button.place(x=color_button_x_margin+200, y=color_button_y_margin+50)
+off_color_button = Button(text="OFF", font=button_font, command=set_basic_color_off, width=9) 
+off_color_button.place(x=color_button_x_margin+250, y=color_button_y_margin+50)
+
 
 effects_label = Label(text = "Effects", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
 effects_label.place(x = int(window_width/2 - 50), y = 300)
 
-for effect in effects_list:
-    effect_button = Button(text =effect, command = set_effect, font=button_font, command=set_effect) 
-    if effect_button_x_margin >= 800:
-        effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
-        effect_button_y_margin += 50
-        effect_button_x_margin = 30
-    else:
-        effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
-        effect_button_x_margin += 120
+
+fire_immitation_effect_button = Button(text="Fire immitation", font=button_font, command=fire_immitation_effect) 
+fire_immitation_effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
+fading_lights_effect_button = Button(text="Fading lights", font=button_font, command=fading_lights_effect) 
+fading_lights_effect_button.place(x=effect_button_x_margin+120, y=effect_button_y_margin)
+running_lights_effect_button = Button(text="Running lights", font=button_font, command=running_lights_effect) 
+running_lights_effect_button.place(x=effect_button_x_margin+230, y=effect_button_y_margin)
+rain_effect_effect_button = Button(text="Rain effect", font=button_font, command=rain_effect_effect) 
+rain_effect_effect_button.place(x=effect_button_x_margin+330, y=effect_button_y_margin)
+equalizer_mode_effect_button = Button(text="Equalizer mode", font=button_font, command=rain_effect_effect) 
+rain_effect_effect_button.place(x=effect_button_x_margin+350, y=effect_button_y_margin)
+       
 
 info_label = Label(text = "Info messages", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
 info_label.place(x = int(window_width/2), y = int(window_height - 75))
