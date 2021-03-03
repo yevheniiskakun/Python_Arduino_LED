@@ -111,77 +111,92 @@ def choose_com_port():
 def set_basic_color_white():
     color = "#FFFFFF"
     open_serial_connection()
-    print("Choosen color white")
+    if DEBUG:
+        print("Choosen color white")
 
 def set_basic_color_blue():
     color = "#0000FF"
     open_serial_connection()
-    print("Choosen color blue")
+    if DEBUG:
+        print("Choosen color blue")
 
 def set_basic_color_red():
     color = "#FF0000"
     open_serial_connection()
-    print("Choosen color red")
+    if DEBUG:
+        print("Choosen color red")
 
 def set_basic_color_yellow():
     color = "#FFFF00"
     open_serial_connection()
-    print("Choosen color yellow")
+    if DEBUG:
+        print("Choosen color yellow")
 
 def set_basic_color_purple():
     color = "#800080"
     open_serial_connection()
-    print("Choosen color purple")
+    if DEBUG:
+        print("Choosen color purple")
 
 def set_basic_color_light_blue():
     color = "#ADD8E6"
     open_serial_connection()
-    print("Choosen color light_blue")
+    if DEBUG:
+        print("Choosen color light_blue")
 
 def set_basic_color_green():
     color = "#008000"
     open_serial_connection()
-    print("Choosen color green")
+    if DEBUG:
+        print("Choosen color green")
 
 def set_basic_color_aqua():
     color = "#00FFFF"
     open_serial_connection()
-    print("Choosen color aqua")
+    if DEBUG:
+        print("Choosen color aqua")
 
 def set_basic_color_violet():
     color = "#8F00FF"
     open_serial_connection()
-    print("Choosen color violet")
+    if DEBUG:
+        print("Choosen color violet")
 
 def set_basic_color_orange():
     color = "#FFA500"
     open_serial_connection()
-    print("Choosen color orange")
+    if DEBUG:
+        print("Choosen color orange")
 
 def set_basic_color_pink():
     color = "#FFC0CB"
     open_serial_connection()
-    print("Choosen color pink")
+    if DEBUG:
+        print("Choosen color pink")
 
 def set_basic_color_fuchsia():
     color = "#FF00FF"
     open_serial_connection()
-    print("Choosen color fuchsia")
+    if DEBUG:
+        print("Choosen color fuchsia")
 
 def set_basic_color_lime():
     color = "#00FF00"
     open_serial_connection()
-    print("Choosen color lime")
+    if DEBUG:
+        print("Choosen color lime")
 
 def set_basic_color_cyan():
     color = "#00FFFF"
     open_serial_connection()
-    print("Choosen color cyan")
+    if DEBUG:
+        print("Choosen color cyan")
 
 def set_basic_color_off():
     color = "#000000"
     open_serial_connection()
-    print("Choosen basic color off")
+    if DEBUG:
+        print("Choosen basic color off")
 
 def set_custom_color():
     clean_info_label()
@@ -193,23 +208,28 @@ def set_custom_color():
     info_label = Label(text = "You choose this color", bg = label_info_background_color, fg=custom_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
     open_serial_connection()
-    print("Custom color: ", custom_color)
+    if DEBUG:
+        print("Custom color: ", custom_color)
 
 def fire_immitation_effect():
     open_serial_connection()
-    print("Choosen effect is fire_immitation_effect")
+    if DEBUG:
+        print("Choosen effect is fire_immitation_effect")
 
 def fading_lights_effect():
     open_serial_connection()
-    print("Choosen effect is fading_lights_effect")
+    if DEBUG:
+        print("Choosen effect is fading_lights_effect")
 
 def running_lights_effect():
     open_serial_connection()
-    print("Choosen effect is running_lights_effect")
+    if DEBUG:
+        print("Choosen effect is running_lights_effect")
 
 def rain_effect_effect():
     open_serial_connection()
-    print("Choosen effect is rain_effect_effect")
+    if DEBUG:
+        print("Choosen effect is rain_effect_effect")
 
 def set_random_color():
     clean_info_label()
@@ -217,13 +237,15 @@ def set_random_color():
     open_serial_connection()
     info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
-    print("Random color is ", random_color)
+    if DEBUG:
+        print("Random color is ", random_color)
 
 def set_brightness():
     led_brightness = 0
     brightness_value = int(brightness_var.get())
     open_serial_connection()
-    print("Brightness", brightness_value)
+    if DEBUG:
+        print("Brightness", brightness_value)
 
 
 
