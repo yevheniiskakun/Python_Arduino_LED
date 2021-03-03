@@ -9,141 +9,10 @@ from tkinter import ttk
 from win32api import GetSystemMetrics
 import random
 
+DEBUG = True
+
 WORKING_SERIAL_PORT = None
 baud_rate = 9600
-
-def serial_ports():
-    """ Lists serial port names
-
-        :raises EnvironmentError:
-            On unsupported or unknown platforms
-        :returns:
-            A list of the serial ports available on the system
-    """
-    if sys.platform.startswith('win'):
-        ports = ['COM%s' % (i + 1) for i in range(256)]
-    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
-        # this excludes your current terminal "/dev/tty"
-        ports = glob.glob('/dev/tty[A-Za-z]*')
-    elif sys.platform.startswith('darwin'):
-        ports = glob.glob('/dev/tty.*')
-    else:
-        raise EnvironmentError('Unsupported platform')
-
-    result = []
-    for port in ports:
-        try:
-            s = serial.Serial(port)
-            s.close()
-            result.append(port)
-        except (OSError, serial.SerialException):
-            pass
-    return result
-
-def open_serial_connection():
-    try:
-        ser = serial.Serial(WORKING_SERIAL_PORT, baud_rate)
-    except:
-        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=red, font=("Verdana", 14))
-
-def choose_com_port():
-    choosen_port = com_port_combo_box.get()
-    global WORKING_SERIAL_PORT
-    WORKING_SERIAL_PORT = choosen_port
-    print("Choosen port: ", choosen_port)
-
-
-def set_basic_color_white():
-    color = "#FFFFFF"
-    print("Choosen color white")
-
-def set_basic_color_blue():
-    color = "#0000FF"
-    print("Choosen color blue")
-
-def set_basic_color_red():
-    color = "#FF0000"
-    print("Choosen color red")
-
-def set_basic_color_yellow():
-    color = "#FFFF00"
-    print("Choosen color yellow")
-
-def set_basic_color_purple():
-    color = "#800080"
-    print("Choosen color purple")
-
-def set_basic_color_light_blue():
-    color = "#ADD8E6"
-    print("Choosen color light_blue")
-
-def set_basic_color_green():
-    color = "#008000"
-    print("Choosen color green")
-
-def set_basic_color_aqua():
-    color = "#00FFFF"
-    print("Choosen color aqua")
-
-def set_basic_color_violet():
-    color = "#8F00FF"
-    print("Choosen color violet")
-
-def set_basic_color_orange():
-    color = "#FFA500"
-    print("Choosen color orange")
-
-def set_basic_color_pink():
-    color = "#FFC0CB"
-    print("Choosen color pink")
-
-def set_basic_color_fuchsia():
-    color = "#FF00FF"
-    print("Choosen color fuchsia")
-
-def set_basic_color_lime():
-    color = "#00FF00"
-    print("Choosen color lime")
-
-def set_basic_color_cyan():
-    color = "#00FFFF"
-    print("Choosen color cyan")
-
-def set_basic_color_off():
-    color = "#000000"
-    print("Choosen basic color off")
-
-def set_custom_color():
-    custom_color = ""
-    red_value = int(red_var.get())
-    green_value = int(green_var.get())
-    blue_value = int(blue_var.get())
-    custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
-    print("Custom color: ", custom_color)
-
-def fire_immitation_effect():
-    print("Choosen effect is fire_immitation_effect")
-
-def fading_lights_effect():
-    print("Choosen effect is fading_lights_effect")
-
-def running_lights_effect():
-    print("Choosen effect is running_lights_effect")
-
-def rain_effect_effect():
-    print("Choosen effect is rain_effect_effect")
-
-def set_random_color():
-    #time.sleep(0.1)
-    random_color = "#%06x" % random.randint(0, 0xFFFFFF)
-    info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
-    info_label.place(x = int(window_width/2), y = int(window_height - 75))
-    print("Random color is ", random_color)
-
-def set_brightness():
-    led_brightness = 0
-    brightness_value = int(brightness_var.get())
-    print("Brightness", brightness_value)
 
 
 screen_width = GetSystemMetrics(0)
@@ -179,6 +48,184 @@ effect_button_x_margin = 30
 effect_button_y_margin = 350
 
 button_font = ("Verdana", 10)
+
+success_message_color = "green"
+warning_message_color = "yellow"
+danger_message_color = "red"
+
+def serial_ports():
+    """ Lists serial port names
+
+        :raises EnvironmentError:
+            On unsupported or unknown platforms
+        :returns:
+            A list of the serial ports available on the system
+    """
+    if sys.platform.startswith('win'):
+        ports = ['COM%s' % (i + 1) for i in range(256)]
+    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+        # this excludes your current terminal "/dev/tty"
+        ports = glob.glob('/dev/tty[A-Za-z]*')
+    elif sys.platform.startswith('darwin'):
+        ports = glob.glob('/dev/tty.*')
+    else:
+        raise EnvironmentError('Unsupported platform')
+
+    result = []
+    for port in ports:
+        try:
+            s = serial.Serial(port)
+            s.close()
+            result.append(port)
+        except (OSError, serial.SerialException):
+            pass
+    return result
+
+def clean_info_label():
+    info_label.place_forget()
+
+def open_serial_connection():
+    clean_info_label()
+    global info_label
+    if  WORKING_SERIAL_PORT == None or "COM" not in WORKING_SERIAL_PORT or WORKING_SERIAL_PORT == "":
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+        info_label.place(x = int(window_width/2), y = int(window_height - 75))
+    else:
+        ser = serial.Serial(WORKING_SERIAL_PORT, baud_rate)
+
+def choose_com_port():
+    clean_info_label()
+    choosen_port = com_port_combo_box.get()
+    global WORKING_SERIAL_PORT
+    global info_label
+    if  choosen_port == None or "COM" not in choosen_port or choosen_port == "":
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    else:
+        WORKING_SERIAL_PORT = choosen_port
+        info_label = Label(text = "COM port choosen", bg = label_info_background_color, fg=success_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
+    if DEBUG:
+        print("Choosen port: ", choosen_port)
+
+
+def set_basic_color_white():
+    color = "#FFFFFF"
+    open_serial_connection()
+    print("Choosen color white")
+
+def set_basic_color_blue():
+    color = "#0000FF"
+    open_serial_connection()
+    print("Choosen color blue")
+
+def set_basic_color_red():
+    color = "#FF0000"
+    open_serial_connection()
+    print("Choosen color red")
+
+def set_basic_color_yellow():
+    color = "#FFFF00"
+    open_serial_connection()
+    print("Choosen color yellow")
+
+def set_basic_color_purple():
+    color = "#800080"
+    open_serial_connection()
+    print("Choosen color purple")
+
+def set_basic_color_light_blue():
+    color = "#ADD8E6"
+    open_serial_connection()
+    print("Choosen color light_blue")
+
+def set_basic_color_green():
+    color = "#008000"
+    open_serial_connection()
+    print("Choosen color green")
+
+def set_basic_color_aqua():
+    color = "#00FFFF"
+    open_serial_connection()
+    print("Choosen color aqua")
+
+def set_basic_color_violet():
+    color = "#8F00FF"
+    open_serial_connection()
+    print("Choosen color violet")
+
+def set_basic_color_orange():
+    color = "#FFA500"
+    open_serial_connection()
+    print("Choosen color orange")
+
+def set_basic_color_pink():
+    color = "#FFC0CB"
+    open_serial_connection()
+    print("Choosen color pink")
+
+def set_basic_color_fuchsia():
+    color = "#FF00FF"
+    open_serial_connection()
+    print("Choosen color fuchsia")
+
+def set_basic_color_lime():
+    color = "#00FF00"
+    open_serial_connection()
+    print("Choosen color lime")
+
+def set_basic_color_cyan():
+    color = "#00FFFF"
+    open_serial_connection()
+    print("Choosen color cyan")
+
+def set_basic_color_off():
+    color = "#000000"
+    open_serial_connection()
+    print("Choosen basic color off")
+
+def set_custom_color():
+    clean_info_label()
+    custom_color = ""
+    red_value = int(red_var.get())
+    green_value = int(green_var.get())
+    blue_value = int(blue_var.get())
+    custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
+    info_label = Label(text = "You choose this color", bg = label_info_background_color, fg=custom_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
+    open_serial_connection()
+    print("Custom color: ", custom_color)
+
+def fire_immitation_effect():
+    open_serial_connection()
+    print("Choosen effect is fire_immitation_effect")
+
+def fading_lights_effect():
+    open_serial_connection()
+    print("Choosen effect is fading_lights_effect")
+
+def running_lights_effect():
+    open_serial_connection()
+    print("Choosen effect is running_lights_effect")
+
+def rain_effect_effect():
+    open_serial_connection()
+    print("Choosen effect is rain_effect_effect")
+
+def set_random_color():
+    clean_info_label()
+    random_color = "#%06x" % random.randint(0, 0xFFFFFF)
+    open_serial_connection()
+    info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
+    print("Random color is ", random_color)
+
+def set_brightness():
+    led_brightness = 0
+    brightness_value = int(brightness_var.get())
+    open_serial_connection()
+    print("Brightness", brightness_value)
+
+
 
 window = Tk()
 window.title("Python Arduino LED v1.0.0")
