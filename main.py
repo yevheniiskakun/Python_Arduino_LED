@@ -147,8 +147,10 @@ main_background_color = "#212121"
 label_info_background_color = "#212121"
 label_info_font_color = "white"
 
-
-
+color_buttons_bg_color = "white"
+color_buttons_fg_color = "black"
+effect_buttons_bg_color = "white"
+effect_buttons_fg_color = "black"
 
 color_button_x_margin = 400
 color_button_y_margin = 70
@@ -219,52 +221,52 @@ com_port_combo_box.current()
 
 
 
-white_color_button = Button(text="White", font=button_font, command=set_basic_color_white, width=9) 
+white_color_button = Button(text="White", font=button_font, command=set_basic_color_white, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
 white_color_button.place(x=color_button_x_margin, y=color_button_y_margin)
-blue_color_button = Button(text="Blue", font=button_font, command=set_basic_color_blue, width=9) 
-blue_color_button.place(x=color_button_x_margin+60, y=color_button_y_margin)
-red_color_button = Button(text="Red", font=button_font, command=set_basic_color_red, width=9) 
-red_color_button.place(x=color_button_x_margin+100, y=color_button_y_margin)
-yellow_color_button = Button(text="Yellow", font=button_font, command=set_basic_color_yellow, width=9) 
-yellow_color_button.place(x=color_button_x_margin+150, y=color_button_y_margin)
-purple_color_button = Button(text="Purple", font=button_font, command=set_basic_color_purple, width=9) 
-purple_color_button.place(x=color_button_x_margin+200, y=color_button_y_margin)
-light_blue_color_button = Button(text="Light_blue", font=button_font, command=set_basic_color_light_blue, width=9) 
-light_blue_color_button.place(x=color_button_x_margin+250, y=color_button_y_margin)
-green_color_button = Button(text="Green", font=button_font, command=set_basic_color_green, width=9) 
-green_color_button.place(x=color_button_x_margin+350, y=color_button_y_margin)
-aqua_color_button = Button(text="Aqua", font=button_font, command=set_basic_color_aqua, width=9) 
-aqua_color_button.place(x=color_button_x_margin+350, y=color_button_y_margin)
-violet_color_button = Button(text="Violet", font=button_font, command=set_basic_color_violet, width=9) 
-violet_color_button.place(x=color_button_x_margin+400, y=color_button_y_margin)
-orange_color_button = Button(text="Orange", font=button_font, command=set_basic_color_orange, width=9) 
-orange_color_button.place(x=color_button_x_margin, y=color_button_y_margin+50)
-pink_color_button = Button(text="Pink", font=button_font, command=set_basic_color_pink, width=9) 
-pink_color_button.place(x=color_button_x_margin+50, y=color_button_y_margin+50)
-fuchsia_color_button = Button(text="Fuchsia", font=button_font, command=set_basic_color_fuchsia, width=9) 
-fuchsia_color_button.place(x=color_button_x_margin+100, y=color_button_y_margin+50)
-lime_color_button = Button(text="Lime", font=button_font, command=set_basic_color_lime, width=9) 
-lime_color_button.place(x=color_button_x_margin+150, y=color_button_y_margin+50)
-cyan_color_button = Button(text="Cyan", font=button_font, command=set_basic_color_cyan, width=9) 
-cyan_color_button.place(x=color_button_x_margin+200, y=color_button_y_margin+50)
-off_color_button = Button(text="OFF", font=button_font, command=set_basic_color_off, width=9) 
-off_color_button.place(x=color_button_x_margin+250, y=color_button_y_margin+50)
+blue_color_button = Button(text="Blue", font=button_font, command=set_basic_color_blue, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+blue_color_button.place(x=color_button_x_margin+90, y=color_button_y_margin)
+red_color_button = Button(text="Red", font=button_font, command=set_basic_color_red, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+red_color_button.place(x=color_button_x_margin+180, y=color_button_y_margin)
+yellow_color_button = Button(text="Yellow", font=button_font, command=set_basic_color_yellow, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+yellow_color_button.place(x=color_button_x_margin+270, y=color_button_y_margin)
+purple_color_button = Button(text="Purple", font=button_font, command=set_basic_color_purple, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+purple_color_button.place(x=color_button_x_margin+360, y=color_button_y_margin)
+light_blue_color_button = Button(text="Light_blue", font=button_font, command=set_basic_color_light_blue, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+light_blue_color_button.place(x=color_button_x_margin, y=color_button_y_margin+50)
+green_color_button = Button(text="Green", font=button_font, command=set_basic_color_green, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+green_color_button.place(x=color_button_x_margin+90, y=color_button_y_margin+50)
+aqua_color_button = Button(text="Aqua", font=button_font, command=set_basic_color_aqua, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+aqua_color_button.place(x=color_button_x_margin+180, y=color_button_y_margin+50)
+violet_color_button = Button(text="Violet", font=button_font, command=set_basic_color_violet, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+violet_color_button.place(x=color_button_x_margin+270, y=color_button_y_margin+50)
+orange_color_button = Button(text="Orange", font=button_font, command=set_basic_color_orange, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+orange_color_button.place(x=color_button_x_margin+360, y=color_button_y_margin+50)
+pink_color_button = Button(text="Pink", font=button_font, command=set_basic_color_pink, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+pink_color_button.place(x=color_button_x_margin, y=color_button_y_margin+100)
+fuchsia_color_button = Button(text="Fuchsia", font=button_font, command=set_basic_color_fuchsia, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+fuchsia_color_button.place(x=color_button_x_margin+90, y=color_button_y_margin+100)
+lime_color_button = Button(text="Lime", font=button_font, command=set_basic_color_lime, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+lime_color_button.place(x=color_button_x_margin+180, y=color_button_y_margin+100)
+cyan_color_button = Button(text="Cyan", font=button_font, command=set_basic_color_cyan, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+cyan_color_button.place(x=color_button_x_margin+270, y=color_button_y_margin+100)
+off_color_button = Button(text="OFF", font=button_font, command=set_basic_color_off, width=9, bg=color_buttons_bg_color, fg=color_buttons_fg_color) 
+off_color_button.place(x=color_button_x_margin+360, y=color_button_y_margin+100)
 
 
 effects_label = Label(text = "Effects", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
 effects_label.place(x = int(window_width/2 - 50), y = 300)
 
 
-fire_immitation_effect_button = Button(text="Fire immitation", font=button_font, command=fire_immitation_effect) 
+fire_immitation_effect_button = Button(text="Fire immitation", font=button_font, command=fire_immitation_effect, width=12, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color) 
 fire_immitation_effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
-fading_lights_effect_button = Button(text="Fading lights", font=button_font, command=fading_lights_effect) 
-fading_lights_effect_button.place(x=effect_button_x_margin+120, y=effect_button_y_margin)
-running_lights_effect_button = Button(text="Running lights", font=button_font, command=running_lights_effect) 
+fading_lights_effect_button = Button(text="Fading lights", font=button_font, command=fading_lights_effect, width=12, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color) 
+fading_lights_effect_button.place(x=effect_button_x_margin+115, y=effect_button_y_margin)
+running_lights_effect_button = Button(text="Running lights", font=button_font, command=running_lights_effect, width=12, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color) 
 running_lights_effect_button.place(x=effect_button_x_margin+230, y=effect_button_y_margin)
-rain_effect_effect_button = Button(text="Rain effect", font=button_font, command=rain_effect_effect) 
+rain_effect_effect_button = Button(text="Rain effect", font=button_font, command=rain_effect_effect, width=12, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color) 
 rain_effect_effect_button.place(x=effect_button_x_margin+330, y=effect_button_y_margin)
-equalizer_mode_effect_button = Button(text="Equalizer mode", font=button_font, command=rain_effect_effect) 
-rain_effect_effect_button.place(x=effect_button_x_margin+350, y=effect_button_y_margin)
+equalizer_mode_effect_button = Button(text="Equalizer mode", font=button_font, command=rain_effect_effect, width=12, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color) 
+rain_effect_effect_button.place(x=effect_button_x_margin+345, y=effect_button_y_margin)
        
 
 info_label = Label(text = "Info messages", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
