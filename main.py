@@ -93,6 +93,16 @@ def open_serial_connection():
     else:
         ser = serial.Serial(WORKING_SERIAL_PORT, baud_rate)
 
+def close_serial_connection():
+    global ser
+    try:
+        ser.close()
+    except:
+        if DEBUG:
+            print("Can not close serial connection")
+        else:
+            pass
+
 def choose_com_port():
     clean_info_label()
     choosen_port = com_port_combo_box.get()
@@ -261,8 +271,7 @@ n = tk.StringVar()
 com_port_combo_box = ttk.Combobox(window, width = 27,  
                             textvariable = n) 
   
-com_port_combo_box['values'] = ('Please choose COM port',  
-                          ) 
+com_port_combo_box['values'] = ('Please choose COM port', ) 
 
 choose_com_port_button = Button(text ="Choose COM port", command = choose_com_port, font=button_font)
 
