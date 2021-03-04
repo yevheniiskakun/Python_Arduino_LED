@@ -89,12 +89,15 @@ def open_serial_connection():
     global info_label
     if  WORKING_SERIAL_PORT == None or "COM" not in WORKING_SERIAL_PORT or WORKING_SERIAL_PORT == "":
         info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
-        info_label.place(x = int(window_width/2), y = int(window_height - 75))
     else:
-        ser = serial.Serial(WORKING_SERIAL_PORT, baud_rate)
+        try:
+            global ser
+            ser = serial.Serial(WORKING_SERIAL_PORT, baud_rate)
+        except serial.SerialException:
+            info_label = Label(text = "COM port is not available", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))       
 
 def close_serial_connection():
-    global ser
     try:
         ser.close()
     except:
@@ -108,20 +111,22 @@ def choose_com_port():
     choosen_port = com_port_combo_box.get()
     global WORKING_SERIAL_PORT
     global info_label
-    if  choosen_port == None or "COM" not in choosen_port or choosen_port == "":
+    if  choosen_port == None or choosen_port == "Please choose COM port" or choosen_port == "":
         info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
     else:
         WORKING_SERIAL_PORT = choosen_port
         info_label = Label(text = "COM port choosen", bg = label_info_background_color, fg=success_message_color, font=("Verdana", 14))
+        if DEBUG:
+            print("Choosen port: ", choosen_port)
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
-    if DEBUG:
-        print("Choosen port: ", choosen_port)
+    
 
 
 def set_basic_color_white():
     color = "#FFFFFF"
     open_serial_connection()
-
+    global ser
+    ser.write('#FFFFFF'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color white")
@@ -129,7 +134,8 @@ def set_basic_color_white():
 def set_basic_color_blue():
     color = "#0000FF"
     open_serial_connection()
-
+    global ser
+    ser.write('#0000FF'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color blue")
@@ -137,7 +143,8 @@ def set_basic_color_blue():
 def set_basic_color_red():
     color = "#FF0000"
     open_serial_connection()
-
+    global ser
+    ser.write('#FF0000'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color red")
@@ -145,7 +152,8 @@ def set_basic_color_red():
 def set_basic_color_yellow():
     color = "#FFFF00"
     open_serial_connection()
-
+    global ser
+    ser.write('#FFFF00'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color yellow")
@@ -153,7 +161,8 @@ def set_basic_color_yellow():
 def set_basic_color_purple():
     color = "#800080"
     open_serial_connection()
-
+    global ser
+    ser.write('#800080'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color purple")
@@ -161,7 +170,8 @@ def set_basic_color_purple():
 def set_basic_color_light_blue():
     color = "#ADD8E6"
     open_serial_connection()
-
+    global ser
+    ser.write('#ADD8E6'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color light_blue")
@@ -169,7 +179,8 @@ def set_basic_color_light_blue():
 def set_basic_color_green():
     color = "#008000"
     open_serial_connection()
-
+    global ser
+    ser.write('#008000'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color green")
@@ -177,7 +188,8 @@ def set_basic_color_green():
 def set_basic_color_aqua():
     color = "#00FFFF"
     open_serial_connection()
-
+    global ser
+    ser.write('#00FFFF'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color aqua")
@@ -185,7 +197,8 @@ def set_basic_color_aqua():
 def set_basic_color_violet():
     color = "#8F00FF"
     open_serial_connection()
-
+    global ser
+    ser.write('#8F00FF'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color violet")
@@ -193,7 +206,8 @@ def set_basic_color_violet():
 def set_basic_color_orange():
     color = "#FFA500"
     open_serial_connection()
-
+    global ser
+    ser.write('#FFA500'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color orange")
@@ -201,7 +215,8 @@ def set_basic_color_orange():
 def set_basic_color_pink():
     color = "#FFC0CB"
     open_serial_connection()
-
+    global ser
+    ser.write('#FFC0CB'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color pink")
@@ -209,7 +224,8 @@ def set_basic_color_pink():
 def set_basic_color_fuchsia():
     color = "#FF00FF"
     open_serial_connection()
-
+    global ser
+    ser.write('#FF00FF'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color fuchsia")
@@ -217,7 +233,8 @@ def set_basic_color_fuchsia():
 def set_basic_color_lime():
     color = "#00FF00"
     open_serial_connection()
-
+    global ser
+    ser.write('#00FF00'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color lime")
@@ -225,7 +242,8 @@ def set_basic_color_lime():
 def set_basic_color_cyan():
     color = "#00FFFF"
     open_serial_connection()
-
+    global ser
+    ser.write('#00FFFF'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen color cyan")
@@ -233,12 +251,14 @@ def set_basic_color_cyan():
 def set_basic_color_off():
     color = "#000000"
     open_serial_connection()
-
+    global ser
+    ser.write('#000000'.encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen basic color off")
 
 def set_custom_color():
+    global ser
     clean_info_label()
     custom_color = ""
     red_value = int(red_var.get())
@@ -247,36 +267,41 @@ def set_custom_color():
     custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
     info_label = Label(text = "You choose this color", bg = label_info_background_color, fg=custom_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
+    #final_color = str(red_value) + "," + str(green_value) + "," + str(blue_value) + "\n"
     open_serial_connection()
-
+    ser.write(custom_color.encode())
     close_serial_connection()
     if DEBUG:
         print("Custom color: ", custom_color)
 
 def fire_immitation_effect():
     open_serial_connection()
-
+    global ser
+    ser.write("fire immitation".encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is fire_immitation_effect")
 
 def fading_lights_effect():
     open_serial_connection()
-
+    global ser
+    ser.write("fading lights".encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is fading_lights_effect")
 
 def running_lights_effect():
     open_serial_connection()
-
+    global ser
+    ser.write("running lights".encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is running_lights_effect")
 
 def rain_effect_effect():
     open_serial_connection()
-
+    global ser
+    ser.write("rain effect".encode())
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is rain_effect_effect")
@@ -285,7 +310,7 @@ def set_random_color():
     clean_info_label()
     random_color = "#%06x" % random.randint(0, 0xFFFFFF)
     open_serial_connection()
-
+    ser.write(random_color.encode())
     close_serial_connection()
     info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
