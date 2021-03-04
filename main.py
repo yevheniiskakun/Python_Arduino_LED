@@ -53,6 +53,20 @@ success_message_color = "green"
 warning_message_color = "yellow"
 danger_message_color = "red"
 
+window = Tk()
+window.title("Python Arduino LED v1.0.0")
+window.geometry("{}x{}+{}+{}".format(window_width, window_height, margin_left, margin_top))
+window.minsize(width=window_min_width, height=window_min_height)
+window.configure(bg=main_background_color)
+# add resizable in future
+window.resizable(0, 0)
+
+global info_label
+# Add info label to show users necessary information
+info_label = Label(window, text = "Info messages", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
+info_label.place(x = int(window_width/2), y = int(window_height - 75))
+
+
 def serial_ports():
     """ Lists serial port names
 
@@ -107,10 +121,11 @@ def close_serial_connection():
             pass
 
 def choose_com_port():
-    clean_info_label()
+    global info_label
+    info_label.place_forget()
     choosen_port = com_port_combo_box.get()
     global WORKING_SERIAL_PORT
-    global info_label
+    
     if  choosen_port == None or choosen_port == "Please choose COM port" or choosen_port == "":
         info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
     else:
@@ -259,17 +274,21 @@ def set_basic_color_off():
 
 def set_custom_color():
     global ser
-    clean_info_label()
+    global info_label
+    info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=label_info_background_color, font=("Verdana", 14))
+    info_label.place_forget()
     custom_color = ""
     red_value = int(red_var.get())
     green_value = int(green_var.get())
     blue_value = int(blue_var.get())
-    custom_color = '#{:02x}{:02x}{:02x}'.format( red_value, green_value , blue_value )
-    info_label = Label(text = "You choose this color", bg = label_info_background_color, fg=custom_color, font=("Verdana", 14))
-    info_label.place(x = int(window_width/2), y = int(window_height - 75))
-    #final_color = str(red_value) + "," + str(green_value) + "," + str(blue_value) + "\n"
+    custom_color = '#{:02x}{:02x}{:02x}'.format(red_value, green_value , blue_value)
     open_serial_connection()
-    ser.write(custom_color.encode())
+    try:
+        ser.write(custom_color.encode())
+        info_label = Label(text = "You choose this color", bg = label_info_background_color, fg=custom_color, font=("Verdana", 14))
+    except:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Custom color: ", custom_color)
@@ -310,9 +329,12 @@ def set_random_color():
     clean_info_label()
     random_color = "#%06x" % random.randint(0, 0xFFFFFF)
     open_serial_connection()
-    ser.write(random_color.encode())
+    try:
+        ser.write(random_color.encode())
+        info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
+    except:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
     close_serial_connection()
-    info_label = Label(text = "This color was choosen", bg = label_info_background_color, fg=random_color, font=("Verdana", 14))
     info_label.place(x = int(window_width/2), y = int(window_height - 75))
     if DEBUG:
         print("Random color is ", random_color)
@@ -328,13 +350,7 @@ def set_brightness():
 
 
 
-window = Tk()
-window.title("Python Arduino LED v1.0.0")
-window.geometry("{}x{}+{}+{}".format(window_width, window_height, margin_left, margin_top))
-window.minsize(width=window_min_width, height=window_min_height)
-window.configure(bg=main_background_color)
-# add resizable in future
-window.resizable(0, 0)
+
 
 n = tk.StringVar() 
 com_port_combo_box = ttk.Combobox(window, width = 27,  
@@ -342,7 +358,7 @@ com_port_combo_box = ttk.Combobox(window, width = 27,
   
 com_port_combo_box['values'] = ('Please choose COM port', ) 
 
-choose_com_port_button = Button(text ="Choose COM port", command = choose_com_port, font=button_font)
+choose_com_port_button = Button(text ="Choose COM port", command = choose_com_port, font=button_font, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0)
 
 # get list of all COM ports
 connected_serial_ports = serial_ports()
@@ -368,9 +384,9 @@ blue_slider.config(highlightbackground="#212121")
 brightness_slider.config(highlightbackground="#212121")
 
 
-set_color_button = Button(text ="Set color", command = set_custom_color, font=button_font)
-set_random_color_button = Button(text ="Random color", command = set_random_color, font=button_font)
-set_brightness_button = Button(text ="Set brightness", command = set_brightness, font=button_font)
+set_color_button = Button(window, text ="Set color", command = set_custom_color, font=button_font, bg=color_buttons_bg_color, fg="#00C7CE", bd=0)
+set_random_color_button = Button(window, text ="Random color", command = set_random_color, font=button_font, bg=color_buttons_bg_color, fg="#0293BF", bd=0)
+set_brightness_button = Button(window, text ="Set brightness", command = set_brightness, font=button_font, bg=color_buttons_bg_color, fg="#FFC30B", bd=0)
 
 # Adding combobox drop down list 
 com_port_combo_box.place(x=10, y=10)
@@ -387,35 +403,35 @@ set_brightness_button.place(x=220, y=285)
 com_port_combo_box.current()  
 
 # Add all color buttons to window 
-white_color_button = Button(text="White", font=button_font, command=set_basic_color_white, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+white_color_button = Button(window,text="White", font=button_font, command=set_basic_color_white, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 white_color_button.place(x=color_button_x_margin, y=color_button_y_margin)
-blue_color_button = Button(text="Blue", font=button_font, command=set_basic_color_blue, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+blue_color_button = Button(window,text="Blue", font=button_font, command=set_basic_color_blue, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 blue_color_button.place(x=color_button_x_margin+90, y=color_button_y_margin)
-red_color_button = Button(text="Red", font=button_font, command=set_basic_color_red, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+red_color_button = Button(window,text="Red", font=button_font, command=set_basic_color_red, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 red_color_button.place(x=color_button_x_margin+180, y=color_button_y_margin)
-yellow_color_button = Button(text="Yellow", font=button_font, command=set_basic_color_yellow, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+yellow_color_button = Button(window,text="Yellow", font=button_font, command=set_basic_color_yellow, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 yellow_color_button.place(x=color_button_x_margin+270, y=color_button_y_margin)
-purple_color_button = Button(text="Purple", font=button_font, command=set_basic_color_purple, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+purple_color_button = Button(window,text="Purple", font=button_font, command=set_basic_color_purple, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 purple_color_button.place(x=color_button_x_margin+360, y=color_button_y_margin)
-light_blue_color_button = Button(text="Light_blue", font=button_font, command=set_basic_color_light_blue, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+light_blue_color_button = Button(window,text="Light_blue", font=button_font, command=set_basic_color_light_blue, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 light_blue_color_button.place(x=color_button_x_margin, y=color_button_y_margin+50)
-green_color_button = Button(text="Green", font=button_font, command=set_basic_color_green, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+green_color_button = Button(window,text="Green", font=button_font, command=set_basic_color_green, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 green_color_button.place(x=color_button_x_margin+90, y=color_button_y_margin+50)
-aqua_color_button = Button(text="Aqua", font=button_font, command=set_basic_color_aqua, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+aqua_color_button = Button(window,text="Aqua", font=button_font, command=set_basic_color_aqua, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 aqua_color_button.place(x=color_button_x_margin+180, y=color_button_y_margin+50)
-violet_color_button = Button(text="Violet", font=button_font, command=set_basic_color_violet, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+violet_color_button = Button(window,text="Violet", font=button_font, command=set_basic_color_violet, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 violet_color_button.place(x=color_button_x_margin+270, y=color_button_y_margin+50)
-orange_color_button = Button(text="Orange", font=button_font, command=set_basic_color_orange, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+orange_color_button = Button(window,text="Orange", font=button_font, command=set_basic_color_orange, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 orange_color_button.place(x=color_button_x_margin+360, y=color_button_y_margin+50)
-pink_color_button = Button(text="Pink", font=button_font, command=set_basic_color_pink, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+pink_color_button = Button(window,text="Pink", font=button_font, command=set_basic_color_pink, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 pink_color_button.place(x=color_button_x_margin, y=color_button_y_margin+100)
-fuchsia_color_button = Button(text="Fuchsia", font=button_font, command=set_basic_color_fuchsia, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+fuchsia_color_button = Button(window,text="Fuchsia", font=button_font, command=set_basic_color_fuchsia, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 fuchsia_color_button.place(x=color_button_x_margin+90, y=color_button_y_margin+100)
-lime_color_button = Button(text="Lime", font=button_font, command=set_basic_color_lime, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+lime_color_button = Button(window,text="Lime", font=button_font, command=set_basic_color_lime, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 lime_color_button.place(x=color_button_x_margin+180, y=color_button_y_margin+100)
-cyan_color_button = Button(text="Cyan", font=button_font, command=set_basic_color_cyan, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+cyan_color_button = Button(window,text="Cyan", font=button_font, command=set_basic_color_cyan, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 cyan_color_button.place(x=color_button_x_margin+270, y=color_button_y_margin+100)
-off_color_button = Button(text="OFF", font=button_font, command=set_basic_color_off, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
+off_color_button = Button(window,text="OFF", font=button_font, command=set_basic_color_off, width=color_buttons_width, height=color_buttons_height, bg=color_buttons_bg_color, fg=color_buttons_fg_color, bd=0) 
 off_color_button.place(x=color_button_x_margin+360, y=color_button_y_margin+100)
 
 
@@ -423,20 +439,18 @@ effects_label = Label(text = "Effects", bg = label_info_background_color, fg=lab
 effects_label.place(x = int(window_width/2 - 50), y = 300)
 
 # Add all effect buttons to window
-fire_immitation_effect_button = Button(text="Fire immitation", font=button_font, command=fire_immitation_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
+fire_immitation_effect_button = Button(window, text="Fire immitation", font=button_font, command=fire_immitation_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
 fire_immitation_effect_button.place(x=effect_button_x_margin, y=effect_button_y_margin)
-fading_lights_effect_button = Button(text="Fading lights", font=button_font, command=fading_lights_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
+fading_lights_effect_button = Button(window,text="Fading lights", font=button_font, command=fading_lights_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
 fading_lights_effect_button.place(x=effect_button_x_margin+115, y=effect_button_y_margin)
-running_lights_effect_button = Button(text="Running lights", font=button_font, command=running_lights_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
+running_lights_effect_button = Button(window,text="Running lights", font=button_font, command=running_lights_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
 running_lights_effect_button.place(x=effect_button_x_margin+230, y=effect_button_y_margin)
-rain_effect_effect_button = Button(text="Rain effect", font=button_font, command=rain_effect_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
+rain_effect_effect_button = Button(window,text="Rain effect", font=button_font, command=rain_effect_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
 rain_effect_effect_button.place(x=effect_button_x_margin+330, y=effect_button_y_margin)
-equalizer_mode_effect_button = Button(text="Equalizer mode", font=button_font, command=rain_effect_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
+equalizer_mode_effect_button = Button(window,text="Equalizer mode", font=button_font, command=rain_effect_effect, width=effect_buttons_width, bg=effect_buttons_bg_color, fg=effect_buttons_fg_color, bd=0) 
 rain_effect_effect_button.place(x=effect_button_x_margin+345, y=effect_button_y_margin)
        
-# Add info label to show users necessary information
-info_label = Label(text = "Info messages", bg = label_info_background_color, fg=label_info_font_color, font=("Verdana", 14))
-info_label.place(x = int(window_width/2), y = int(window_height - 75))
+
 
 
 window.mainloop()
