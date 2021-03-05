@@ -141,7 +141,11 @@ def set_basic_color_white():
     color = "#FFFFFF"
     open_serial_connection()
     global ser
-    ser.write('#FFFFFF'.encode())
+    try:
+        ser.write('#FFFFFF'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color white")
@@ -150,7 +154,11 @@ def set_basic_color_blue():
     color = "#0000FF"
     open_serial_connection()
     global ser
-    ser.write('#0000FF'.encode())
+    try:
+        ser.write('#0000FF'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color blue")
@@ -159,7 +167,11 @@ def set_basic_color_red():
     color = "#FF0000"
     open_serial_connection()
     global ser
-    ser.write('#FF0000'.encode())
+    try:
+        ser.write('#FF0000'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color red")
@@ -168,7 +180,11 @@ def set_basic_color_yellow():
     color = "#FFFF00"
     open_serial_connection()
     global ser
-    ser.write('#FFFF00'.encode())
+    try:
+        ser.write('#FFFF00'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color yellow")
@@ -177,7 +193,11 @@ def set_basic_color_purple():
     color = "#800080"
     open_serial_connection()
     global ser
-    ser.write('#800080'.encode())
+    try:
+        ser.write('#800080'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color purple")
@@ -186,7 +206,11 @@ def set_basic_color_light_blue():
     color = "#ADD8E6"
     open_serial_connection()
     global ser
-    ser.write('#ADD8E6'.encode())
+    try:
+        ser.write('#ADD8E6'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color light_blue")
@@ -195,7 +219,11 @@ def set_basic_color_green():
     color = "#008000"
     open_serial_connection()
     global ser
-    ser.write('#008000'.encode())
+    try:
+        ser.write('#008000'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color green")
@@ -204,7 +232,11 @@ def set_basic_color_aqua():
     color = "#00FFFF"
     open_serial_connection()
     global ser
-    ser.write('#00FFFF'.encode())
+    try:
+        ser.write('#00FFFF'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color aqua")
@@ -213,7 +245,11 @@ def set_basic_color_violet():
     color = "#8F00FF"
     open_serial_connection()
     global ser
-    ser.write('#8F00FF'.encode())
+    try:
+        ser.write('#8F00FF'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color violet")
@@ -222,7 +258,11 @@ def set_basic_color_orange():
     color = "#FFA500"
     open_serial_connection()
     global ser
-    ser.write('#FFA500'.encode())
+    try:
+        ser.write('#FFA500'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color orange")
@@ -231,7 +271,11 @@ def set_basic_color_pink():
     color = "#FFC0CB"
     open_serial_connection()
     global ser
-    ser.write('#FFC0CB'.encode())
+    try:
+        ser.write('#FFC0CB'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color pink")
@@ -240,7 +284,11 @@ def set_basic_color_fuchsia():
     color = "#FF00FF"
     open_serial_connection()
     global ser
-    ser.write('#FF00FF'.encode())
+    try:
+        ser.write('#FF00FF'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color fuchsia")
@@ -249,7 +297,11 @@ def set_basic_color_lime():
     color = "#00FF00"
     open_serial_connection()
     global ser
-    ser.write('#00FF00'.encode())
+    try:
+        ser.write('#00FF00'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color lime")
@@ -258,7 +310,11 @@ def set_basic_color_cyan():
     color = "#00FFFF"
     open_serial_connection()
     global ser
-    ser.write('#00FFFF'.encode())
+    try:
+        ser.write('#00FFFF'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen color cyan")
@@ -267,7 +323,11 @@ def set_basic_color_off():
     color = "#000000"
     open_serial_connection()
     global ser
-    ser.write('#000000'.encode())
+    try:
+        ser.write('#000000'.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen basic color off")
@@ -296,7 +356,11 @@ def set_custom_color():
 def fire_immitation_effect():
     open_serial_connection()
     global ser
-    ser.write("fire immitation".encode())
+    try:
+        ser.write("fire immitation".encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is fire_immitation_effect")
@@ -304,7 +368,11 @@ def fire_immitation_effect():
 def fading_lights_effect():
     open_serial_connection()
     global ser
-    ser.write("fading lights".encode())
+    try:
+        ser.write("fading lights".encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is fading_lights_effect")
@@ -312,7 +380,11 @@ def fading_lights_effect():
 def running_lights_effect():
     open_serial_connection()
     global ser
-    ser.write("running lights".encode())
+    try:
+        ser.write("running lights".encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is running_lights_effect")
@@ -320,7 +392,11 @@ def running_lights_effect():
 def rain_effect_effect():
     open_serial_connection()
     global ser
-    ser.write("rain effect".encode())
+    try:
+        ser.write("rain effect".encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Choosen effect is rain_effect_effect")
@@ -343,7 +419,11 @@ def set_brightness():
     led_brightness = 0
     brightness_value = int(brightness_var.get())
     open_serial_connection()
-
+    try:
+        ser.write(brightness_value.encode())
+    except NameError:
+        info_label = Label(text = "Please choose COM port", bg = label_info_background_color, fg=danger_message_color, font=("Verdana", 14))
+    info_label.place(x = int(window_width/2), y = int(window_height - 75))
     close_serial_connection()
     if DEBUG:
         print("Brightness", brightness_value)
